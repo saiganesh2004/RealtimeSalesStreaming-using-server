@@ -1,0 +1,29 @@
+version: "3.9"
+
+services:
+  redis:
+    image: redis:latest
+    container_name: my-local-redis
+    ports:
+      - "6379:6379"
+    restart: unless-stopped
+
+  backend:
+    build: ./backend-python
+    container_name: realtime-backend
+    ports:
+      - "8000:8000"
+    depends_on:
+      - redis
+    restart: unless-stopped
+
+  frontend:
+    build: ./frontend-streamlit
+    container_name: realtime-frontend
+    ports:
+      - "8501:8501"
+    environment:
+      - BACKEND_URL=http://realtime-backend:8000
+    depends_on:
+      - backend
+    restart: unless-stopped
