@@ -1,0 +1,15 @@
+project-root/
+│
+├── backend/
+│   ├── main.py          ← FastAPI app
+│   ├── requirements.txt
+│   ├── Dockerfile       
+│
+├── frontend/
+│   ├── app.py           ← Streamlit app
+│
+├── data/
+│   └── sales.csv
+│
+└── producer/
+    └── producer.py      ← Redis stream producer
